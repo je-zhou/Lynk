@@ -14,6 +14,19 @@ class User {
   User({required this.school});
 }
 
+class ForumReplies {
+  String message;
+  String author;
+  String date;
+  String time;
+
+  ForumReplies(
+      {required this.author,
+      required this.message,
+      required this.date,
+      required this.time});
+}
+
 class Forum {
   String title;
   String author;

@@ -37,6 +37,7 @@ class FeedPage extends StatelessWidget {
           const SizedBox(height: 8),
           Expanded(
               child: ListView(
+                  padding: EdgeInsets.zero,
                   children: activities
                       .map((a) => activityCard(a, screenWidth - 48))
                       .toList()))
@@ -47,48 +48,51 @@ class FeedPage extends StatelessWidget {
 }
 
 Widget activityCard(Activity activity, double maxWidth) {
-  return Card(
-    child: Container(
-      padding: const EdgeInsets.all(16),
-      height: 300,
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        const SizedBox(height: 4),
-        Text(
-          activity.name,
-          style: const TextStyle(
-              color: Style.color4, fontWeight: FontWeight.bold, fontSize: 16),
-        ),
-        const SizedBox(height: 4),
-        const Text(
-          'Recommended by your instructors ',
-          style: TextStyle(
-              color: Style.color2, fontWeight: FontWeight.bold, fontSize: 14),
-        ),
-        const SizedBox(height: 12),
-        Expanded(
-            child: Image(
-          width: maxWidth,
-          image: NetworkImage(activity.imgUrl),
-          fit: BoxFit.cover,
-        )),
-        const SizedBox(height: 8),
-        Text(activity.description),
-        const SizedBox(height: 4),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: const [
-            Text(
-              '7:00pm Monday 22 Aug',
-              style: TextStyle(color: Style.color2),
-            ),
-            Text(
-              'Find out more',
-              style:
-                  TextStyle(color: Style.color4, fontWeight: FontWeight.bold),
-            )
-          ],
-        )
-      ]),
+  return GestureDetector(
+    onTap: () {},
+    child: Card(
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        height: 300,
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          const SizedBox(height: 4),
+          Text(
+            activity.name,
+            style: const TextStyle(
+                color: Style.color4, fontWeight: FontWeight.bold, fontSize: 16),
+          ),
+          const SizedBox(height: 4),
+          const Text(
+            'Recommended by your instructors',
+            style: TextStyle(
+                color: Style.color2, fontWeight: FontWeight.bold, fontSize: 14),
+          ),
+          const SizedBox(height: 16),
+          Expanded(
+              child: Image(
+            width: maxWidth,
+            image: NetworkImage(activity.imgUrl),
+            fit: BoxFit.cover,
+          )),
+          const SizedBox(height: 16),
+          Text(activity.description),
+          const SizedBox(height: 12),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: const [
+              Text(
+                '7:00pm Monday 22 Aug',
+                style: TextStyle(color: Style.color2),
+              ),
+              Text(
+                'Find out more',
+                style:
+                    TextStyle(color: Style.color4, fontWeight: FontWeight.bold),
+              )
+            ],
+          )
+        ]),
+      ),
     ),
   );
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:govhack22/data/forum.dart';
+import 'package:govhack22/presentation/forum_page.dart';
 import 'package:govhack22/presentation/mentor_chat.dart';
 
 import '../data/data.dart';
@@ -130,52 +131,58 @@ class ForumTiles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+    return GestureDetector(
+      onTap: () => navigateToForum(context, forum),
+      child: Container(
+        color: Colors.transparent,
+        child: Stack(
+          alignment: Alignment.center,
           children: [
-            const Divider(),
-            const SizedBox(height: 8),
-            Text(
-              forum.title,
-              style: const TextStyle(
-                  color: Style.color4,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 18),
-            ),
-            const SizedBox(height: 4),
-            Row(
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const Divider(),
+                const SizedBox(height: 8),
                 Text(
-                  '${forum.replies} replies - Last message ${forum.minSinceLastReply} mins ago',
-                  style: const TextStyle(color: Style.color2, fontSize: 14),
+                  forum.title,
+                  style: const TextStyle(
+                      color: Style.color4,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 18),
                 ),
-                const SizedBox(width: 4),
-                forum.pinned
-                    ? const Icon(
-                        FontAwesomeIcons.mapPin,
-                        color: Colors.red,
-                        size: 16,
-                      )
-                    : const SizedBox()
+                const SizedBox(height: 4),
+                Row(
+                  children: [
+                    Text(
+                      '${forum.replies} replies - Last message ${forum.minSinceLastReply} mins ago',
+                      style: const TextStyle(color: Style.color2, fontSize: 14),
+                    ),
+                    const SizedBox(width: 4),
+                    forum.pinned
+                        ? const Icon(
+                            FontAwesomeIcons.mapPin,
+                            color: Colors.red,
+                            size: 16,
+                          )
+                        : const SizedBox()
+                  ],
+                ),
+                const SizedBox(height: 8),
               ],
             ),
-            const SizedBox(height: 8),
+            const Padding(
+              padding: EdgeInsets.only(top: 14),
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: Icon(
+                  Icons.chevron_right_rounded,
+                  size: 30,
+                ),
+              ),
+            )
           ],
         ),
-        const Padding(
-          padding: EdgeInsets.only(top: 14),
-          child: Align(
-            alignment: Alignment.centerRight,
-            child: Icon(
-              Icons.chevron_right_rounded,
-              size: 30,
-            ),
-          ),
-        )
-      ],
+      ),
     );
   }
 }
@@ -184,5 +191,12 @@ navigateToMentorChat(context, Mentor mentor) {
   Navigator.push(
     context,
     MaterialPageRoute(builder: (context) => MentorChat(mentor: mentor)),
+  );
+}
+
+navigateToForum(context, Forum forum) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => ForumPage(forum: forum)),
   );
 }

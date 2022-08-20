@@ -62,3 +62,31 @@ List<Forum> forumData = [
       minSinceLastReply: 30,
       pinned: false)
 ];
+
+List<ForumReplies> forumReplies = [
+  ForumReplies(
+      author: "Maya Vasic",
+      message:
+          "Hey guys, I'm in year 12 this year and graduating soon and I'm starting to panic about what to do after exams?!! My friends all know what they are going to do meanwhile I have absolutely no clue! What are your experiences?",
+      date: "07/05/2022",
+      time: "13:05"),
+  ForumReplies(
+      author: "Larry Higginbottom",
+      message:
+          "I was in your situation last year, I didn't do any extracurricular activities and so didn't know what my strengths or hobbies were. But I knew that I needed to get some experience, so I looked around and found a great community center to volunteer at! Use your Lync dashboard to see what events are near you and if any pique your interest. Try and do ones that are different from each other to cover a broad category. Hopefully then you can start to determine what you're interested or good at. Good luck!",
+      date: "07/05/2022",
+      time: "13:29"),
+  ForumReplies(
+    author: "Maya Vasic",
+    message:
+        "Wow thanks Larry! Another question, were you able to use your mentor as a reference for your resume? Are the sessions with these local communities official or unofficial? Looking forward to your response!",
+    date: "07/05/2022",
+    time: "15:44",
+  ),
+  ForumReplies(
+      author: "Alyse Gowry",
+      message:
+          "Hi, yes, Lync sessions are actually accredited and approved by the government, so you can totally use them as a CV references! I'm not entirely sure about the 1-day workshops, but have a chat with a mentor and I'm sure they'll know the answer",
+      date: "07/05/2022",
+      time: "17:31")
+];
