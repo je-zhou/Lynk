@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:govhack22/data/activities.dart';
 
 import '../data/data.dart';
 
@@ -9,59 +10,36 @@ class FeedPage extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     return Padding(
-      padding: const EdgeInsets.fromLTRB(24, 96, 24, 16),
+      padding: const EdgeInsets.fromLTRB(24, 64, 24, 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            "What's on near you",
-            style: TextStyle(fontSize: 24, color: Style.color4),
+          Row(
+            children: [
+              const Icon(Icons.menu, size: 40),
+              const SizedBox(width: 20),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "What's on near you",
+                    style: TextStyle(fontSize: 24, color: Style.color4),
+                  ),
+                  Text(
+                    userData.school.name,
+                    style: TextStyle(
+                        fontSize: 14, color: Style.color4.withOpacity(0.6)),
+                  ),
+                ],
+              ),
+            ],
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 8),
           Expanded(
               child: ListView(
-            children: [
-              activityCard(
-                  Activity(
-                      name: 'Resume 101',
-                      description: 'Learn how to write resumes!!!',
-                      imgUrl:
-                          'https://s3.resume.io/cdn-cgi/image/width=380,dpr=2,format=auto/uploads/local_template_image/image/3367/persistent-resource/toronto-resume-templates.jpg'),
-                  screenWidth - 48),
-              activityCard(
-                  Activity(
-                      name: 'Gain accredited work experience',
-                      description:
-                          'Learn industry-hosted work experience from a Learn Local trainer!',
-                      imgUrl: 'https://i.imgur.com/ZLhQmOQ.jpeg'),
-                  screenWidth - 48),
-              activityCard(
-                  Activity(
-                    name: 'Online design workshop',
-                    description:
-                        'Learn about human-centred design from our experienced practitioners.',
-                    imgUrl: 'https://i.imgur.com/KWdFoCO.jpeg',
-                  ),
-                  screenWidth - 48),
-              activityCard(
-                Activity(
-                  name: 'Become a teacher!',
-                  description:
-                      'Are you an educator ready to take the next step in your career? There is a new way to upskill and become a qualified early childhood teacher sooner, while also receiving financial support.',
-                  imgUrl: 'https://i.imgur.com/t4kMsn8.jpeg',
-                ),
-                screenWidth - 48,
-              ),
-              activityCard(
-                  Activity(
-                    name: 'Join a tech school!',
-                    description:
-                        'Igniting interest and inspiring achievement in STEM. Preparing the students of today for the jobs of tomorrow.',
-                    imgUrl: 'https://i.imgur.com/HymIQ63.jpeg',
-                  ),
-                  screenWidth - 48),
-            ],
-          )),
+                  children: activities
+                      .map((a) => activityCard(a, screenWidth - 48))
+                      .toList()))
         ],
       ),
     );
@@ -72,7 +50,7 @@ Widget activityCard(Activity activity, double maxWidth) {
   return Card(
     child: Container(
       padding: const EdgeInsets.all(16),
-      height: 280,
+      height: 300,
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         const SizedBox(height: 4),
         Text(
@@ -80,7 +58,13 @@ Widget activityCard(Activity activity, double maxWidth) {
           style: const TextStyle(
               color: Style.color4, fontWeight: FontWeight.bold, fontSize: 16),
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 4),
+        const Text(
+          'Recommended by your instructors ',
+          style: TextStyle(
+              color: Style.color2, fontWeight: FontWeight.bold, fontSize: 14),
+        ),
+        const SizedBox(height: 12),
         Expanded(
             child: Image(
           width: maxWidth,
@@ -91,8 +75,12 @@ Widget activityCard(Activity activity, double maxWidth) {
         Text(activity.description),
         const SizedBox(height: 4),
         Row(
-          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: const [
+            Text(
+              '7:00pm Monday 22 Aug',
+              style: TextStyle(color: Style.color2),
+            ),
             Text(
               'Find out more',
               style:

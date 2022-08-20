@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class Style {
   static const color1 = Color(0xffCAC9D2);
@@ -13,13 +14,55 @@ class User {
   User({required this.school});
 }
 
+class Forum {
+  String title;
+  String author;
+  int replies;
+  int minSinceLastReply;
+  bool pinned;
+
+  Forum(
+      {required this.title,
+      required this.author,
+      required this.replies,
+      required this.minSinceLastReply,
+      required this.pinned});
+}
+
+List<Forum> forumData = [
+  Forum(title: '', author: '', replies: 1, minSinceLastReply: 1, pinned: false)
+];
+
+class Mentor {
+  String name;
+  String imgUrl;
+  int unopennedReplies;
+
+  Mentor(
+      {required this.name,
+      required this.imgUrl,
+      required this.unopennedReplies});
+}
+
+List<Mentor> mentors = [Mentor(name: '', imgUrl: '', unopennedReplies: 4)];
+
 class Activity {
   String name;
   String description;
   String imgUrl;
+  List<String> tags;
+  String organisor;
+  LatLng latLng;
+  String date;
 
   Activity(
-      {required this.name, required this.description, required this.imgUrl});
+      {required this.name,
+      required this.description,
+      required this.imgUrl,
+      required this.tags,
+      required this.latLng,
+      required this.organisor,
+      required this.date});
 }
 
 class School {
@@ -89,7 +132,7 @@ class School {
 
 final userData = User(
   school: School(
-      name: 'GLEN WAVERLEY SECONDARY COLLEGE',
+      name: 'WOODMANS HILL SECONDARY COLLEGE',
       sector: 'G',
       suburb: 'GLEN WAVERLEY - WEST',
       totalCompletedY12: 100,
