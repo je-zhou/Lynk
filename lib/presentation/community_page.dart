@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:govhack22/data/forum.dart';
+import 'package:govhack22/presentation/mentor_chat.dart';
 
 import '../data/data.dart';
 import '../data/mentor.dart';
@@ -57,64 +58,68 @@ class MentorTiles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.topRight,
-      children: [
-        Column(
-          children: [
-            Container(
-                margin: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-                height: 80,
-                width: 80,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(40),
-                  color: Colors.red,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 2,
-                      blurRadius: 4,
-                      offset: const Offset(0, 2), // changes position of shadow
-                    ),
-                  ],
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(40),
-                  child: Image(
-                    fit: BoxFit.cover,
-                    image: AssetImage(mentor.imgUrl),
+    return GestureDetector(
+      onTap: () => navigateToMentorChat(context, mentor),
+      child: Stack(
+        alignment: Alignment.topRight,
+        children: [
+          Column(
+            children: [
+              Container(
+                  margin: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+                  height: 80,
+                  width: 80,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(40),
+                    color: Colors.red,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 2,
+                        blurRadius: 4,
+                        offset:
+                            const Offset(0, 2), // changes position of shadow
+                      ),
+                    ],
                   ),
-                )),
-            Text(mentor.name),
-          ],
-        ),
-        if (mentor.unopennedReplies > 0)
-          Container(
-            margin: const EdgeInsets.fromLTRB(0, 4, 4, 0),
-            alignment: Alignment.center,
-            height: 36,
-            width: 36,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(40),
-              color: Style.color4,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 1,
-                  blurRadius: 1,
-                  offset: const Offset(0, 2), // changes position of shadow
-                ),
-              ],
-            ),
-            child: Text(
-              mentor.unopennedReplies.toString(),
-              style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold),
-            ),
-          )
-      ],
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(40),
+                    child: Image(
+                      fit: BoxFit.cover,
+                      image: AssetImage(mentor.imgUrl),
+                    ),
+                  )),
+              Text(mentor.name),
+            ],
+          ),
+          if (mentor.unopennedReplies > 0)
+            Container(
+              margin: const EdgeInsets.fromLTRB(0, 4, 4, 0),
+              alignment: Alignment.center,
+              height: 36,
+              width: 36,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(40),
+                color: Style.color4,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 1,
+                    blurRadius: 1,
+                    offset: const Offset(0, 2), // changes position of shadow
+                  ),
+                ],
+              ),
+              child: Text(
+                mentor.unopennedReplies.toString(),
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold),
+              ),
+            )
+        ],
+      ),
     );
   }
 }
@@ -173,4 +178,11 @@ class ForumTiles extends StatelessWidget {
       ],
     );
   }
+}
+
+navigateToMentorChat(context, Mentor mentor) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => MentorChat(mentor: mentor)),
+  );
 }
