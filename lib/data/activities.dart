@@ -11,7 +11,7 @@ List activities = [
       tags: ['How to write a good resume'],
       organisor: 'Woodsman Hill Careers',
       latLng: const LatLng(-37.56668938174067, 143.89387145773625),
-      date: ''),
+      date: '22/08/22'),
   Activity(
       name: 'Gain accredited work experience',
       description:

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:govhack22/data/activities.dart';
 
 import '../data/data.dart';
+import 'event_page.dart';
 
 class FeedPage extends StatelessWidget {
   const FeedPage({Key? key}) : super(key: key);
@@ -39,7 +40,7 @@ class FeedPage extends StatelessWidget {
               child: ListView(
                   padding: EdgeInsets.zero,
                   children: activities
-                      .map((a) => activityCard(a, screenWidth - 48))
+                      .map((a) => activityCard(a, screenWidth - 48, context))
                       .toList()))
         ],
       ),
@@ -47,9 +48,9 @@ class FeedPage extends StatelessWidget {
   }
 }
 
-Widget activityCard(Activity activity, double maxWidth) {
+Widget activityCard(Activity activity, double maxWidth, context) {
   return GestureDetector(
-    onTap: () {},
+    onTap: () => navigateToEvent(context, activity),
     child: Card(
       child: Container(
         padding: const EdgeInsets.all(16),
@@ -94,5 +95,15 @@ Widget activityCard(Activity activity, double maxWidth) {
         ]),
       ),
     ),
+  );
+}
+
+navigateToEvent(context, Activity activity) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+        builder: (context) => EventPage(
+              activity: activity,
+            )),
   );
 }

@@ -1,56 +1,46 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-import '../data/data.dart';
-import '../data/helpers.dart';
-
-class MapPage extends StatefulWidget {
-  const MapPage({Key? key}) : super(key: key);
+class MapWidget extends StatefulWidget {
+  final LatLng coords;
+  const MapWidget({Key? key, required this.coords}) : super(key: key);
 
   @override
-  State<MapPage> createState() => _MapPageState();
+  State<MapWidget> createState() => _MapPageState();
 }
 
-class _MapPageState extends State<MapPage> {
+class _MapPageState extends State<MapWidget> {
   final Completer<GoogleMapController> _controller = Completer();
 
   @override
   Widget build(BuildContext context) {
-    User user = userData;
+    CameraPosition kPosition = CameraPosition(
+      target: widget.coords,
+      zoom: 14,
+    );
 
-    return FutureBuilder(
-        future: getCoords(user.school.name),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) return const CircularProgressIndicator();
-
-          LatLng coords = snapshot.data as LatLng;
-
-          CameraPosition kSchool = CameraPosition(
-            target: coords,
-            zoom: 13,
-          );
-
-          return FutureBuilder(
-              future: getPlaces('driving', coords),
-              builder: (context, snapshot) {
-                if (!snapshot.hasData) return const CircularProgressIndicator();
-
-                Set<Marker> places = snapshot.data as Set<Marker>;
-
-                places.add(Marker(
-                    markerId: const MarkerId('school'), position: coords));
-
-                return GoogleMap(
-                  mapType: MapType.normal,
-                  initialCameraPosition: kSchool,
-                  onMapCreated: (GoogleMapController controller) {
-                    _controller.complete(controller);
-                  },
-                  markers: places,
-                );
-              });
-        });
+    return Container(
+      height: 200,
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(32)),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(32),
+        child: GoogleMap(
+          myLocationButtonEnabled: false,
+          compassEnabled: false,
+          mapType: MapType.normal,
+          initialCameraPosition: kPosition,
+          onMapCreated: (GoogleMapController controller) {
+            _controller.complete(controller);
+          },
+          markers: <Marker>{
+            Marker(
+              markerId: const MarkerId('coords'),
+              position: widget.coords,
+            )
+          },
+        ),
+      ),
+    );
   }
 }

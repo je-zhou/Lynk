@@ -18,6 +18,7 @@ class ForumPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Stack(
+                    alignment: Alignment.center,
                     children: [
                       Row(
                         children: [
