@@ -29,10 +29,6 @@ class Forum {
       required this.pinned});
 }
 
-List<Forum> forumData = [
-  Forum(title: '', author: '', replies: 1, minSinceLastReply: 1, pinned: false)
-];
-
 class Mentor {
   String name;
   String imgUrl;
@@ -43,8 +39,6 @@ class Mentor {
       required this.imgUrl,
       required this.unopennedReplies});
 }
-
-List<Mentor> mentors = [Mentor(name: '', imgUrl: '', unopennedReplies: 4)];
 
 class Activity {
   String name;

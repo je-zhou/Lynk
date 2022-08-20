@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:govhack22/data/forum.dart';
 
 import '../data/data.dart';
+import '../data/mentor.dart';
 
 class AnalyticsPage extends StatelessWidget {
   const AnalyticsPage({Key? key}) : super(key: key);
@@ -18,40 +21,30 @@ class AnalyticsPage extends StatelessWidget {
                 'Your Communities',
                 style: TextStyle(fontSize: 24, color: Style.color4),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 32),
               const Text(
                 'Mentors',
                 style: TextStyle(fontSize: 14, color: Style.color3),
               ),
+              const SizedBox(height: 16),
               SizedBox(
                 height: 120,
                 child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: const [
-                    MentorTiles(),
-                    MentorTiles(),
-                    MentorTiles(),
-                    MentorTiles(),
-                    MentorTiles(),
-                    MentorTiles(),
-                  ],
-                ),
+                    scrollDirection: Axis.horizontal,
+                    children:
+                        mentors.map((e) => MentorTiles(mentor: e)).toList()),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 24),
               const Text(
                 'Spaces',
                 style: TextStyle(fontSize: 14, color: Style.color3),
               ),
+              const SizedBox(height: 16),
               Flexible(
                   child: ListView(
-                children: const [
-                  ForumTiles(),
-                  ForumTiles(),
-                  ForumTiles(),
-                  ForumTiles(),
-                  ForumTiles(),
-                ],
-              ))
+                      padding: EdgeInsets.zero,
+                      children:
+                          forumData.map((e) => ForumTiles(forum: e)).toList()))
             ]),
       ),
     );
@@ -59,27 +52,76 @@ class AnalyticsPage extends StatelessWidget {
 }
 
 class MentorTiles extends StatelessWidget {
-  const MentorTiles({Key? key}) : super(key: key);
+  final Mentor mentor;
+  const MentorTiles({Key? key, required this.mentor}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Stack(
+      alignment: Alignment.topRight,
       children: [
-        Container(
-          margin: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-          height: 80,
-          width: 80,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(40), color: Colors.red),
+        Column(
+          children: [
+            Container(
+                margin: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+                height: 80,
+                width: 80,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(40),
+                  color: Colors.red,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 2,
+                      blurRadius: 4,
+                      offset: const Offset(0, 2), // changes position of shadow
+                    ),
+                  ],
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(40),
+                  child: Image(
+                    fit: BoxFit.cover,
+                    image: AssetImage(mentor.imgUrl),
+                  ),
+                )),
+            Text(mentor.name),
+          ],
         ),
-        Text('Zachary'),
+        if (mentor.unopennedReplies > 0)
+          Container(
+            margin: const EdgeInsets.fromLTRB(0, 4, 4, 0),
+            alignment: Alignment.center,
+            height: 36,
+            width: 36,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(40),
+              color: Style.color4,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 1,
+                  blurRadius: 1,
+                  offset: const Offset(0, 2), // changes position of shadow
+                ),
+              ],
+            ),
+            child: Text(
+              mentor.unopennedReplies.toString(),
+              style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold),
+            ),
+          )
       ],
     );
   }
 }
 
 class ForumTiles extends StatelessWidget {
-  const ForumTiles({Key? key}) : super(key: key);
+  final Forum forum;
+  const ForumTiles({Key? key, required this.forum}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -88,22 +130,34 @@ class ForumTiles extends StatelessWidget {
       children: [
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            Divider(),
-            SizedBox(height: 8),
+          children: [
+            const Divider(),
+            const SizedBox(height: 8),
             Text(
-              'Methods 3/4 - HELP!',
-              style: TextStyle(
+              forum.title,
+              style: const TextStyle(
                   color: Style.color4,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w600,
                   fontSize: 18),
             ),
-            SizedBox(height: 4),
-            Text(
-              '122 replies - Last message 2 mins ago',
-              style: TextStyle(color: Style.color2, fontSize: 14),
+            const SizedBox(height: 4),
+            Row(
+              children: [
+                Text(
+                  '${forum.replies} replies - Last message ${forum.minSinceLastReply} mins ago',
+                  style: const TextStyle(color: Style.color2, fontSize: 14),
+                ),
+                const SizedBox(width: 4),
+                forum.pinned
+                    ? const Icon(
+                        FontAwesomeIcons.mapPin,
+                        color: Colors.red,
+                        size: 16,
+                      )
+                    : const SizedBox()
+              ],
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
           ],
         ),
         const Padding(
