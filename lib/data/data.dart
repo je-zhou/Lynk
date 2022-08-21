@@ -61,6 +61,8 @@ class Activity {
   String organisor;
   LatLng latLng;
   String date;
+  String longDescription;
+  String address;
 
   Activity(
       {required this.name,
@@ -69,7 +71,9 @@ class Activity {
       required this.tags,
       required this.latLng,
       required this.organisor,
-      required this.date});
+      required this.date,
+      required this.longDescription,
+      required this.address});
 }
 
 class School {

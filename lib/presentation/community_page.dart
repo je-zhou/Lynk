@@ -7,8 +7,8 @@ import 'package:govhack22/presentation/mentor_chat.dart';
 import '../data/data.dart';
 import '../data/mentor.dart';
 
-class AnalyticsPage extends StatelessWidget {
-  const AnalyticsPage({Key? key}) : super(key: key);
+class OpportunityPage extends StatelessWidget {
+  const OpportunityPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

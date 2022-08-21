@@ -21,9 +21,9 @@ class _LogInPageState extends State<LogInPage> {
           .copyWith(colorScheme: ColorScheme.fromSeed(seedColor: Style.color4)),
       child: Scaffold(
         body: Column(children: [
-          const SizedBox(height: 80),
+          const SizedBox(height: 100),
           Expanded(
-            flex: 1,
+            flex: 2,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 48),
               child: Column(
@@ -112,11 +112,9 @@ class _LogInPageState extends State<LogInPage> {
                         ],
                       ),
                     ),
-                    SizedBox(
-                      height: 36,
-                    ),
+                    const SizedBox(height: 36),
                     Padding(
-                      padding: EdgeInsets.fromLTRB(24, 12, 24, 12),
+                      padding: const EdgeInsets.fromLTRB(24, 12, 24, 12),
                       child: ElevatedButton(
                         onPressed: () => navigateToHome(context),
                         style: ElevatedButton.styleFrom(

@@ -93,7 +93,7 @@ class SchoolTiles extends StatelessWidget {
           const SizedBox(height: 4),
           Text(
             schoolName,
-            style: TextStyle(fontSize: 20),
+            style: const TextStyle(fontSize: 20),
           ),
           const SizedBox(height: 4)
         ],

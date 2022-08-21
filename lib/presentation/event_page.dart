@@ -60,6 +60,22 @@ class EventPage extends StatelessWidget {
                             )
                           ],
                         ),
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: ElevatedButton(
+                              style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all(Style.color4),
+                              ),
+                              onPressed: () {},
+                              child: const Padding(
+                                padding: EdgeInsets.all(4.0),
+                                child: Text(
+                                  'Attend',
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                              )),
+                        ),
                       ],
                     ),
                   ),
@@ -83,13 +99,12 @@ class EventPage extends StatelessWidget {
                       children: [
                         Text(
                           activity.name,
-                          textAlign: TextAlign.center,
                           style: const TextStyle(
                               color: Style.color4,
                               fontWeight: FontWeight.bold,
                               fontSize: 24),
                         ),
-
+                        SizedBox(height: 4),
                         Text('Organised by ${activity.organisor}'),
                         const SizedBox(height: 8),
                         if (activity.tags.isNotEmpty)
@@ -112,14 +127,11 @@ class EventPage extends StatelessWidget {
                                         ))
                                     .toList(),
                               )),
-
                         const SizedBox(height: 16),
-
                         const SizedBox(height: 16),
-                        //TODO:: Change to long desciption
-                        Text(activity.description),
+                        Text(activity.longDescription),
                         const SizedBox(height: 48),
-                        const Text('Address'),
+                        Text(activity.address),
                         const SizedBox(height: 16),
                         MapWidget(coords: activity.latLng)
                       ],
@@ -128,24 +140,6 @@ class EventPage extends StatelessWidget {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(24),
-              child: Align(
-                alignment: Alignment.bottomRight,
-                child: ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Style.color4),
-                    ),
-                    onPressed: () {},
-                    child: const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
-                        'Attend',
-                        style: TextStyle(fontSize: 24),
-                      ),
-                    )),
-              ),
-            )
           ],
         ),
       ),
