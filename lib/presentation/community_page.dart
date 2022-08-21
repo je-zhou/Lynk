@@ -72,7 +72,7 @@ class MentorTiles extends StatelessWidget {
                   width: 80,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(40),
-                    color: Colors.red,
+                    color: Style.color1,
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.5),

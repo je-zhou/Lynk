@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:govhack22/data/mentor.dart';
 
 import '../data/data.dart';
 
@@ -161,9 +160,7 @@ class _MentorChatState extends State<MentorChat> {
                   padding: EdgeInsets.zero,
                   children: children),
             ),
-            SizedBox(
-              height: 16,
-            )
+            const SizedBox(height: 16)
           ],
         ),
       ),

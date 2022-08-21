@@ -71,7 +71,7 @@ List governmentActivities = [
       name: 'Know your Council',
       description: 'Discover your local Council and get involved!',
       imgUrl:
-          'https://s3.resume.io/cdn-cgi/image/width=380,dpr=2,format=auto/uploads/local_template_image/image/3367/persistent-resource/toronto-resume-templates.jpg',
+          'https://wastemanagementreview.com.au/wp-content/uploads/2019/02/ballarat.jpg',
       tags: ['Local Council'],
       organisor: 'Vic Gov',
       latLng: const LatLng(-37.56668938174067, 143.89387145773625),
@@ -82,7 +82,8 @@ List governmentActivities = [
   Activity(
       name: 'Gain accredited work experience',
       description: 'Find a Tech School near you.',
-      imgUrl: 'https://i.imgur.com/ZLhQmOQ.jpeg',
+      imgUrl:
+          'https://www.monash.edu/__data/assets/image/0009/1624545/Digital-Education-Futures.jpg',
       tags: ['Study advanced technology for the future.'],
       organisor: 'Vic Gov',
       latLng: const LatLng(-37.558221751132585, 143.89011997267053),
@@ -93,7 +94,8 @@ List governmentActivities = [
   Activity(
       name: 'SIRs near you',
       description: 'Schools Industries Roundtable opportunities in your area.',
-      imgUrl: 'https://i.imgur.com/KWdFoCO.jpeg',
+      imgUrl:
+          'https://media.edutopia.org/styles/responsive_2880px_16x9/s3/masters/2019-04/iStock-902801564_master.jpg',
       tags: ['SIR'],
       organisor: 'Vic Gov',
       latLng: const LatLng(-37.55945484263534, 143.90427275526235),
