@@ -10,6 +10,16 @@ class FeedPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
+
+    List<Widget> events = governmentActivities
+            .map((a) => activityCard(a, screenWidth, context, true))
+            .toList() +
+        activities
+            .map((a) => activityCard(a, screenWidth, context, false))
+            .toList();
+
+    events.shuffle();
+
     return Padding(
       padding: const EdgeInsets.fromLTRB(24, 64, 24, 16),
       child: Column(
@@ -17,8 +27,6 @@ class FeedPage extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Icon(Icons.menu, size: 40),
-              const SizedBox(width: 20),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -35,23 +43,20 @@ class FeedPage extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 8),
-          Expanded(
-              child: ListView(
-                  padding: EdgeInsets.zero,
-                  children: activities
-                      .map((a) => activityCard(a, screenWidth - 48, context))
-                      .toList()))
+          const SizedBox(height: 16),
+          Expanded(child: ListView(padding: EdgeInsets.zero, children: events))
         ],
       ),
     );
   }
 }
 
-Widget activityCard(Activity activity, double maxWidth, context) {
+Widget activityCard(
+    Activity activity, double maxWidth, context, bool isGovernment) {
   return GestureDetector(
     onTap: () => navigateToEvent(context, activity),
     child: Card(
+      color: isGovernment ? Style.color1 : Colors.white,
       child: Container(
         padding: const EdgeInsets.all(16),
         height: 300,
@@ -63,11 +68,15 @@ Widget activityCard(Activity activity, double maxWidth, context) {
                 color: Style.color4, fontWeight: FontWeight.bold, fontSize: 16),
           ),
           const SizedBox(height: 4),
-          const Text(
-            'Recommended by your instructors',
-            style: TextStyle(
-                color: Style.color2, fontWeight: FontWeight.bold, fontSize: 14),
-          ),
+          isGovernment
+              ? const Text(
+                  'Recommended by the Victorian Government',
+                  style: TextStyle(
+                      color: Style.color2,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14),
+                )
+              : SizedBox(),
           const SizedBox(height: 16),
           Expanded(
               child: Image(
@@ -102,8 +111,9 @@ navigateToEvent(context, Activity activity) {
   Navigator.push(
     context,
     MaterialPageRoute(
-        builder: (context) => EventPage(
-              activity: activity,
-            )),
+      builder: (context) => EventPage(
+        activity: activity,
+      ),
+    ),
   );
 }

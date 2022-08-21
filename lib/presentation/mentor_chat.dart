@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:govhack22/data/mentor.dart';
 
 import '../data/data.dart';
 
@@ -12,22 +13,38 @@ class MentorChat extends StatefulWidget {
 
 class _MentorChatState extends State<MentorChat> {
   TextEditingController controller = TextEditingController();
+  ScrollController scrollController = ScrollController();
 
   List<String> newMessages = [];
 
   @override
   Widget build(BuildContext context) {
     List<Widget> children = [
+      Row(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 8, left: 8),
+            child: Container(
+              height: 24,
+              width: 24,
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Style.color1,
+                  image: DecorationImage(
+                      image: AssetImage(widget.mentor.imgUrl),
+                      fit: BoxFit.cover)),
+            ),
+          ),
+        ],
+      ),
       const Padding(
-        padding: EdgeInsets.only(left: 24, top: 16),
+        padding: EdgeInsets.only(right: 24, top: 16),
         child: Card(
-          color: Style.color3,
+          color: Style.color1,
           child: Padding(
             padding: EdgeInsets.all(16),
             child: Text(
-              "Hi Jack, thanks for agreeing to be one of my mentors! I'm not quite sure what I want to do after I graduate. I know you work in real estate and I'd love to get some advice as this is a field I'm quited interested in!",
-              style: TextStyle(color: Colors.white),
-            ),
+                "In terms of skills that you can bring forth to a job interview, your spoken language is crucial for sure, but don't downplay the importance of listening to your interviewers and comprehending the question, as it may have multiple layers. I've got your email through the app already, so I'll send some documents about our workshops and you choose a day and time that works for you!  😃"),
           ),
         ),
       ),
@@ -38,7 +55,7 @@ class _MentorChatState extends State<MentorChat> {
           child: Padding(
             padding: EdgeInsets.all(16),
             child: Text(
-                "Hi Daniel, thanks for reaching out! Happy to be a mentor and pass on some skills and experiences to the next generation. "),
+                "Great question Daniel! I definitely have improved my verbal communication over the years, as well as my ability to read body language. It's very important to be cohesive and concise with clients. You don't want to bore them but you do want to make sure they are receiving and understanding all the necessary information."),
           ),
         ),
       ),
@@ -62,22 +79,47 @@ class _MentorChatState extends State<MentorChat> {
           child: Padding(
             padding: EdgeInsets.all(16),
             child: Text(
-                "Great question Daniel! I definitely have improved my verbal communication over the years, as well as my ability to read body language. It's very important to be cohesive and concise with clients. You don't want to bore them but you do want to make sure they are receiving and understanding all the necessary information."),
+                "Hi Daniel, thanks for reaching out! Happy to be a mentor and pass on some skills and experiences to the next generation. "),
           ),
         ),
       ),
       const Padding(
-        padding: EdgeInsets.only(right: 24, top: 16),
+        padding: EdgeInsets.only(left: 24, top: 16),
         child: Card(
-          color: Style.color1,
+          color: Style.color3,
           child: Padding(
             padding: EdgeInsets.all(16),
             child: Text(
-                "In terms of skills that you can bring forth to a job interview, your spoken language is crucial for sure, but don't downplay the importance of listening to your interviewers and comprehending the question, as it may have multiple layers. I've got your email through the app already, so I'll send some documents about our workshops and you choose a day and time that works for you!  😃"),
+              "Hi Jack, thanks for agreeing to be one of my mentors! I'm not quite sure what I want to do after I graduate. I know you work in real estate and I'd love to get some advice as this is a field I'm quited interested in!",
+              style: TextStyle(color: Colors.white),
+            ),
           ),
         ),
       ),
     ];
+
+    children.insertAll(
+        0,
+        newMessages.map(
+          (e) => Padding(
+            padding: const EdgeInsets.only(left: 24, top: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Card(
+                  color: Style.color3,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Text(
+                      e,
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ));
 
     return Scaffold(
         body: Stack(children: [
@@ -114,32 +156,14 @@ class _MentorChatState extends State<MentorChat> {
             const SizedBox(height: 32),
             Flexible(
               child: ListView(
+                  controller: scrollController,
+                  reverse: true,
                   padding: EdgeInsets.zero,
-                  children: children +
-                      newMessages
-                          .map(
-                            (e) => Padding(
-                              padding: const EdgeInsets.only(left: 24, top: 16),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Card(
-                                    color: Style.color3,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(16),
-                                      child: Text(
-                                        e,
-                                        style: const TextStyle(
-                                            color: Colors.white),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          )
-                          .toList()),
+                  children: children),
             ),
+            SizedBox(
+              height: 16,
+            )
           ],
         ),
       ),
@@ -175,7 +199,10 @@ class _MentorChatState extends State<MentorChat> {
                     ),
                     onPressed: () {
                       setState(() {
-                        newMessages.add(controller.text);
+                        newMessages.insert(0, controller.text);
+                        scrollController.animateTo(0,
+                            duration: const Duration(milliseconds: 500),
+                            curve: Curves.bounceIn);
                         controller.clear();
                       });
                     },

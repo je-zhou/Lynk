@@ -65,3 +65,40 @@ List activities = [
           'In App Design and Development for iOS with Swift specialization, you will be developing foundational programming skills to support data manipulation from basic functions. \n\nYou will continue to build your skill set to use and apply core graphics, touch handling and gestures, animations and transitions, alerts and actions as well as advanced algorithms, threading and more.',
       address: '123 Ryan St, Brown Hill VIC 3350'),
 ];
+
+List governmentActivities = [
+  Activity(
+      name: 'Know your Council',
+      description: 'Discover your local Council and get involved!',
+      imgUrl:
+          'https://s3.resume.io/cdn-cgi/image/width=380,dpr=2,format=auto/uploads/local_template_image/image/3367/persistent-resource/toronto-resume-templates.jpg',
+      tags: ['Local Council'],
+      organisor: 'Vic Gov',
+      latLng: const LatLng(-37.56668938174067, 143.89387145773625),
+      date: '22/08/22',
+      longDescription:
+          'Know Your Council provides an opportunity for you to access consistent information in regard to the performance of local councils across Victoria.',
+      address: 'The State of Victoria'),
+  Activity(
+      name: 'Gain accredited work experience',
+      description: 'Find a Tech School near you.',
+      imgUrl: 'https://i.imgur.com/ZLhQmOQ.jpeg',
+      tags: ['Study advanced technology for the future.'],
+      organisor: 'Vic Gov',
+      latLng: const LatLng(-37.558221751132585, 143.89011997267053),
+      date: '23/08/22',
+      longDescription:
+          'Tech Schools help students think creatively, work together to solve problems, and help prepare them for the future by delivering the advanced education and STEM skills they need to compete in the future job market.',
+      address: 'The State of Victoria'),
+  Activity(
+      name: 'SIRs near you',
+      description: 'Schools Industries Roundtable opportunities in your area.',
+      imgUrl: 'https://i.imgur.com/KWdFoCO.jpeg',
+      tags: ['SIR'],
+      organisor: 'Vic Gov',
+      latLng: const LatLng(-37.55945484263534, 143.90427275526235),
+      date: '23/08/22',
+      longDescription:
+          'Where secondary schools, training and higher education providers, industry and local government come together and collaborate on improving education, training and employment pathways for local students.',
+      address: '110 Melbourne Rd, Brown Hill VIC 3350'),
+];
